@@ -20,7 +20,7 @@ _____
 #### Command Line 
 
 ```
-python text2image.py --prompt = "An astronaut riding a horse."
+python text2image.py --prompt "An astronaut riding a horse."
 ```
 
 _____
