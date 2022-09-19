@@ -17,7 +17,7 @@ The weights had been converted from the original Pytorch implementation, and are
 
 _____
 
-1) Command Line 
+#### Command Line 
 
 ```
 python text2image.py --prompt = "An astronaut riding a horse."
@@ -25,7 +25,7 @@ python text2image.py --prompt = "An astronaut riding a horse."
 
 _____
 
-2) Python
+#### Python
 
 ```
 from stable_diffusion_tf.stable_diffusion import get_model, text2image
