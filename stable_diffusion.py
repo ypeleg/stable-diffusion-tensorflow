@@ -3,7 +3,7 @@
 import cv2
 from stable_diffusion_tf.stable_diffusion import get_model, text2image
 
-text_encoder, diffusion_model, decoder = get_model(512, 512, download_weights=True, cache_dir = '/home/user/Desktop/slow_storage/huggingface')
+text_encoder, diffusion_model, decoder = get_model(512, 512, download_weights=True)
 
 imgs = text2image("An astronaut riding a horse",
 	img_height=512,
