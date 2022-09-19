@@ -2,8 +2,10 @@
 
 # Stable Diffusion in Tensorflow / Keras
 
-### Original [repo](https://github.com/divamgupta/stable-diffusion-tensorflow) by [Divam Gupta](https://github.com/divamgupta/)
-### Backward [compatibility fixes](https://github.com/ypeleg/stable-diffusion-tensorflow) by [Yam Peleg](https://github.com/ypeleg) 
+> Now supports Older Tensorflow Versions (< 2.8)
+
+#### Original [repo](https://github.com/divamgupta/stable-diffusion-tensorflow) by [Divam Gupta](https://github.com/divamgupta/)
+#### Backward [compatibility fixes](https://github.com/ypeleg/stable-diffusion-tensorflow) by [Yam Peleg](https://github.com/ypeleg) 
 
 
 A Keras / Tensorflow implementation of Stable Diffusion Models for Image Generation. This is a fork of the original repo, that now supports past versions of Tensorflow and Keras.
