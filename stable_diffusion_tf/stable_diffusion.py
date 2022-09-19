@@ -70,7 +70,7 @@ def timestep_embedding(timesteps, dim = 320, max_period = 10000):
     return (embedding).reshape(1, -1)
 
 
-def text2image(prompt, img_height, img_width, text_encoder, diffusion_model, decoder, batch_size = 1, n_steps = 25, unconditional_guidance_scale = 7.5, temperature = 1):
+def text2image(prompt, img_height, img_width, text_encoder, diffusion_model, decoder, batch_size = 1, n_steps = 25, unconditional_guidance_scale = 7.5, temperature = 0.0):
     n_h = img_height // 8
     n_w = img_width // 8
 
