@@ -1,27 +1,29 @@
+
+
 # Stable Diffusion in Tensorflow / Keras
 
-A Keras / Tensorflow implementation of Stable Diffusion.
+### Original [repo](https://github.com/divamgupta/stable-diffusion-tensorflow) by [Divam Gupta](https://github.com/divamgupta/)
+### Backward [compatibility fixes](https://github.com/ypeleg/stable-diffusion-tensorflow) by [Yam Peleg](https://github.com/ypeleg) 
 
+
+A Keras / Tensorflow implementation of Stable Diffusion Models for Image Generation. This is a fork of the original repo, that now supports past versions of Tensorflow and Keras.
 This implementation is easy to understand and have a minimal code footprint.
-
-I have converted the weights from the original Pytorch implementation. 
-
+The weights had been converted from the original Pytorch implementation, and are available for download. (Automaticly downloaded when running the code) 
 
 
-## How to use
+## Usage
 
-1) Using the command line 
+_____
 
-```
-python text2image.py --prompt="An astronaut riding a horse"
-```
-
-2) Using the python interface
+1) Command Line 
 
 ```
-pip install --upgrade git+https://github.com/divamgupta/stable-diffusion-tensorflow
+python text2image.py --prompt = "An astronaut riding a horse."
 ```
 
+_____
+
+2) Python
 
 ```
 from stable_diffusion_tf.stable_diffusion import get_model, text2image
@@ -38,12 +40,13 @@ img = text2image("An astronaut riding a hourse" ,
 cv2.imwrite("/tmp/a.png" , img[0][... , ::-1])
 
 ```
+_____
 
-## Outputs 
+## Example Outputs 
 
 The following outputs have been generated using the Tensorflow/Keras of stable diffusion:
 
-1) *A epic and beautiful rococo werewolf drinking coffee, in a burning coffee shop. ultra-detailed. anime, pixiv, uhd 8k cryengine, octane render*
+1) *An epic and beautiful rococo werewolf drinking coffee, in a burning coffee shop. ultra-detailed. anime, pixiv, uhd 8k cryengine, octane render*
 
 ![a](https://user-images.githubusercontent.com/1890549/190841598-3d0b9bd1-d679-4c8d-bd5e-b1e24397b5c8.png)
 
@@ -53,15 +56,14 @@ The following outputs have been generated using the Tensorflow/Keras of stable d
 ![a](https://user-images.githubusercontent.com/1890549/190841999-689c9c38-ece4-46a0-ad85-f459ec64c5b8.png)
 
 
-
 3) *A vision of paradise, Unreal Engine*
 
 ![a](https://user-images.githubusercontent.com/1890549/190841886-239406ea-72cb-4570-8f4c-fcd074a7ad7f.png)
 
+_____
 
+References:
 
-References :
-
-1) https://github.com/CompVis/stable-diffusion
-
-2) https://github.com/geohot/tinygrad/blob/master/examples/stable_diffusion.py
+- https://github.com/divamgupta/stable-diffusion-tensorflow
+- https://github.com/CompVis/stable-diffusion
+- https://github.com/geohot/tinygrad/blob/master/examples/stable_diffusion.py

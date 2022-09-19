@@ -1,7 +1,9 @@
-import tensorflow as tf
-from .layers import quick_gelu, get_conv2d, apply_seq, td_dot, gelu, GEGLU
-import tensorflow_addons as tfa
+
+
 import numpy as np
+import tensorflow as tf
+import tensorflow_addons as tfa
+from .layers import quick_gelu, get_conv2d, apply_seq, td_dot, gelu, GEGLU
 
 
 class CLIPAttention(tf.keras.layers.Layer):
@@ -64,7 +66,6 @@ class CLIPMLP(tf.keras.layers.Layer):
         return hidden_states
 
 
-
 class CLIPEncoderLayer(tf.keras.layers.Layer):
     def __init__(self):
         super(CLIPEncoderLayer, self).__init__()
@@ -76,16 +77,13 @@ class CLIPEncoderLayer(tf.keras.layers.Layer):
     def __call__(self, inputs):
         [hidden_states, causal_attention_mask] = inputs
         residual = hidden_states
-    
         hidden_states = self.layer_norm1(hidden_states)
         hidden_states = self.self_attn([hidden_states, causal_attention_mask])
         hidden_states = residual + hidden_states
-
         residual = hidden_states
         hidden_states = self.layer_norm2(hidden_states)
         hidden_states = self.mlp(hidden_states)        
         hidden_states = residual + hidden_states
-
         return hidden_states
 
 
@@ -101,14 +99,11 @@ class CLIPEncoder(tf.keras.layers.Layer):
         return hidden_states
 
 
-
 class CLIPTextEmbeddings(tf.keras.layers.Layer):
     def __init__(self , n_words=77):
         super(CLIPTextEmbeddings, self).__init__()
-
         self.token_embedding_layer = tf.keras.layers.Embedding( 49408, 768 , name="token_embedding" )
         self.position_embedding_layer = tf.keras.layers.Embedding( n_words, 768, name="position_embedding")
-
 
     def __call__(self, inputs):
         [input_ids, position_ids] = inputs
@@ -123,13 +118,12 @@ class CLIPTextTransformer(tf.keras.models.Model):
         self.embeddings = CLIPTextEmbeddings( n_words=n_words)
         self.encoder = CLIPEncoder()
         self.final_layer_norm = tf.keras.layers.LayerNormalization( epsilon=1e-5)
-    
-        # self.inp_position_ids = tf.constant(np.array(list(range(n_words)))[None].astype('int32'))
-        self.causal_attention_mask = tf.constant(np.triu(np.ones((1,1,77,77), dtype=np.float32) * -np.inf, k=1))
-        
+
     def __call__(self, inputs, training=False):
         [input_ids, position_ids] = inputs
         x = self.embeddings([input_ids,  position_ids ])
-        x = self.encoder([x, self.causal_attention_mask] )
+        causal_attention_mask = tf.constant(np.triu(np.ones((1, 1, 77, 77), dtype = np.float32) * -np.inf, k = 1))
+        causal_attention_mask = tf.keras.layers.Lambda(lambda x: tf.tile(x, [tf.shape(input_ids)[0], 1, 1, 1]))(causal_attention_mask)
+        x = self.encoder([x, causal_attention_mask] )
         return self.final_layer_norm(x)
 
